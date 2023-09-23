@@ -25,6 +25,20 @@ public class CommentServiceImpl implements CommentService {
 
 
     @Override
+    public ServiceDto<Boolean> deleteAllDeletedStatusComment() {
+        ServiceDto<Boolean> resDto = new ServiceDto<>();
+
+        try {
+            boolean isSuccess = commentRepository.deletePermanently();
+            resDto.setData(isSuccess);
+        } catch (Exception ex) {
+            resDto.setError(ex.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @Override
     public ServiceDto<Boolean> makeStatusDeletedByPostId(Integer postId) {
         ServiceDto<Boolean> resDto = new ServiceDto<>();
 

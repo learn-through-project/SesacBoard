@@ -21,4 +21,6 @@ public interface CommentService {
     public ServiceDto<Boolean> makeStatusDeletedById(Integer commentId);
 
     public ServiceDto<Boolean> makeStatusDeletedByPostId(Integer postId);
+
+    public ServiceDto<Boolean> deleteAllDeletedStatusComment();
 }
