@@ -113,7 +113,7 @@ public class CommentRepositoryImpl implements CommentRepository {
     }
 
     @Override
-    public boolean updateStatusReadyToDeleteById(int commentId) throws Exception {
+    public boolean updateStatusDeleteById(int commentId) throws Exception {
         String selectChildrenQuery = "select ID from COMMENTS where PARENT_ID = ?";
         String updateStatusQuery = "update COMMENTS SET STATUS = 'deleted' where ID = ?";
 
@@ -155,7 +155,7 @@ public class CommentRepositoryImpl implements CommentRepository {
     }
 
     @Override
-    public boolean updateStatusReadyToDeleteByPostId(int postId) throws SQLException {
+    public boolean updateStatusDeleteByPostId(int postId) throws SQLException {
         String sql = "update COMMENTS SET STATUS = 'deleted' where POST_ID = ?";
         int result = 0;
 

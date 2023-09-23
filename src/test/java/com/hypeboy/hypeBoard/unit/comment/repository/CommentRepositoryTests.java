@@ -68,28 +68,28 @@ public class CommentRepositoryTests {
     @Test
     public void updateStatusReadyToDeleteByPostId_Return_Fail() throws Exception {
         int invalidCommentId = invalidComment.getPostId();
-        boolean isSuccess = commentRepository.updateStatusReadyToDeleteByPostId(invalidCommentId);
+        boolean isSuccess = commentRepository.updateStatusDeleteByPostId(invalidCommentId);
         Assertions.assertThat(isSuccess).isFalse();
     }
 
     @Test
     public void updateStatusReadyToDeleteByPostId_Return_Success() throws Exception {
         int validCommentId = validComment.getPostId();
-        boolean isSuccess = commentRepository.updateStatusReadyToDeleteByPostId(validCommentId);
+        boolean isSuccess = commentRepository.updateStatusDeleteByPostId(validCommentId);
         Assertions.assertThat(isSuccess).isTrue();
     }
 
     @Test
     public void updateStatusReadyToDeleteById_Return_Fail() throws Exception {
         int invalidCommentId = invalidComment.getId();
-        boolean isSuccess = commentRepository.updateStatusReadyToDeleteById(invalidCommentId);
+        boolean isSuccess = commentRepository.updateStatusDeleteById(invalidCommentId);
         Assertions.assertThat(isSuccess).isFalse();
     }
 
     @Test
     public void updateStatusReadyToDeleteById_Return_Success() throws Exception {
         int validCommentId = validComment.getId();
-        boolean isSuccess = commentRepository.updateStatusReadyToDeleteById(validCommentId);
+        boolean isSuccess = commentRepository.updateStatusDeleteById(validCommentId);
         Assertions.assertThat(isSuccess).isTrue();
     }
 
