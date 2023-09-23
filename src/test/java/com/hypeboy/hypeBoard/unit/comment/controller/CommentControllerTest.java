@@ -12,18 +12,15 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndView;
 
-import static org.mockito.Mockito.when;
-
 @ExtendWith(MockitoExtension.class)
 public class CommentControllerTest {
     @Mock
-    private CommentService commentService;
+    private CommentService commentServiceImpl;
 
     @InjectMocks
     private CommentController commentController;
@@ -57,7 +54,7 @@ public class CommentControllerTest {
     public void createComment_Return_ModelAndView_Success() {
         BindingResult bindingResult = new BeanPropertyBindingResult(dummyDto, "commentDto");
 
-        when(commentService.createComment(Mockito.any(CommentDto.class))).thenReturn(dummyResDto);
+//        when(commentServiceImpl.createComment(Mockito.any(CommentDto.class))).thenReturn(dummyResDto);
 
         ModelAndView mv = commentController.createComment(dummyDto, bindingResult);
         CommentDto result = (CommentDto) mv.getModel().getOrDefault("result", null);
