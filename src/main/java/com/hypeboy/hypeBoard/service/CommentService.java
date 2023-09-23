@@ -1,24 +1,13 @@
 package com.hypeboy.hypeBoard.service;
 
-
 import com.hypeboy.hypeBoard.dto.CommentDto;
+import com.hypeboy.hypeBoard.dto.ServiceDto;
 import com.hypeboy.hypeBoard.entity.Comment;
-import com.hypeboy.hypeBoard.repository.CommentRepository;
-import com.hypeboy.hypeBoard.service.converter.CommentConverter;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Slf4j
-@Service
-public class CommentService {
-    @Autowired
-    private CommentRepository commentRepository;
+import java.util.List;
 
-    @Autowired
-    private CommentConverter commentConverter;
+public interface CommentService {
+    public ServiceDto<List<Comment>> getCommentByPostId(Integer postId, Integer count);
 
-    public CommentDto createComment(CommentDto dto) {
-        return null;
-    }
+    public ServiceDto<List<Comment>> getCommentList(Integer postId, Integer lastId, Integer count);
 }

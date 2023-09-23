@@ -11,4 +11,8 @@ public class ErrorDto {
         this.msg = msg;
         this.field = field;
     }
+
+    public ErrorDto(String msg) {
+        this.msg = msg;
+    }
 }
