@@ -1,11 +1,14 @@
 package com.hypeboy.hypeBoard.entity;
 
 import com.hypeboy.hypeBoard.dto.UserDto;
+import lombok.Data;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
 
+@Data
 @Getter
 //테이블 이름도 컬럼과 동일하게 이름을 설정해줘야 한다.
 public class User {
