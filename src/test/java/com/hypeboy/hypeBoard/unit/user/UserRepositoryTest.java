@@ -2,6 +2,7 @@ package com.hypeboy.hypeBoard.unit.user;
 
 import com.hypeboy.hypeBoard.connectionpool.ConnectionPool;
 import com.hypeboy.hypeBoard.entity.User;
+import com.hypeboy.hypeBoard.enums.tablesColumns.TableColumnsUser;
 import com.hypeboy.hypeBoard.repository.UserRepositoryImpl;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -10,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -70,12 +70,12 @@ public class UserRepositoryTest {
             when(connection.prepareStatement(anyString())).thenReturn(statement);
             when(statement.executeQuery()).thenReturn(resultSet);
             when(resultSet.next()).thenReturn(true);
-            when(resultSet.getString("ID")).thenReturn(userId);
+            when(resultSet.getString(TableColumnsUser.ID.getString())).thenReturn(userId);
 
             Optional<User> user = userRepository.findById(userId);
 
             verify(statement).setString(1, userId);
-            verify(resultSet).getString("ID");
+            verify(resultSet).getString(TableColumnsUser.ID.getString());
             assertThat(user).isNotNull();
             assertThat(user.get().getId()).isEqualTo(userId);
         }
