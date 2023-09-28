@@ -35,7 +35,7 @@ public class CommentServiceTest {
     private CommentDto validDto;
     private CommentDto invalidDto;
     private Comment validComment;
-    private Comment invalidComment;
+
 
     private void createDummyComment() throws Exception {
         int existCommentId = 1;
@@ -47,24 +47,16 @@ public class CommentServiceTest {
 
         validComment = new Comment(existCommentId, existPostId, existUserId, sampleText, existParentId, status);
 
-        invalidComment = new Comment(
-                existCommentId + 10000,
-                existPostId + 10000,
-                existUserId + "invalid",
-                sampleText,
-                existParentId,
-                status);
     }
 
-    private void createDummyDto() throws  Exception {
-        int existCommentId = 1;
+    private void createDummyDto() {
         int existPostId = 1;
         String existUserId = "test1";
         String sampleText = "updated sample text!!!!!";
         Integer existParentId = null;
-        CommentStatus status = new CommentStatus("blocked");
 
         validDto = new CommentDto(existPostId, existUserId, sampleText);
+        validDto.setParentId(existParentId);
 
         invalidDto = new CommentDto(existPostId - 1000, existUserId, sampleText);
     }
@@ -90,7 +82,7 @@ public class CommentServiceTest {
         Assertions.assertThat(result.getError().getMsg()).isEqualTo(errorMsg);
     }
 
-    
+
 
     @Test
     public void deleteAllDeletedStatusComment_Return_Success() throws Exception {

@@ -17,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class CommentController {
 
     @Autowired
-    CommentService commentService;
+    CommentService commentServiceImpl;
 
     @PostMapping(EndPoint.Path.COMMENT)
     public ModelAndView createComment(@Valid CommentDto dto, BindingResult br) {
@@ -30,7 +30,7 @@ public class CommentController {
         }
 
         ModelAndView mv = new ModelAndView(EndPoint.Path.COMMENT_SUCCESS);
-        CommentDto result = commentService.createComment(dto);
+        CommentDto result = null;
         mv.addObject("result", result);
         return mv;
     }
