@@ -6,6 +6,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
 
 public interface UserController {
-    public String getUserDetail(@PathVariable String userId, BindingResult br, Model model);
+    public String getUserDetail(@PathVariable String userId, Model model);
 
 }

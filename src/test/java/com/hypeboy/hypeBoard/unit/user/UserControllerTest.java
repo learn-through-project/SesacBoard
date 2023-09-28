@@ -43,19 +43,9 @@ public class UserControllerTest {
         private UserDetailDto dummyDto = new UserDetailDto();
 
         @Test
-        public void getUserDetail_Return_View_With_Null_When_PathVariable_Error() {
-            when(br.hasErrors()).thenReturn(true);
-            String view = userController.getUserDetail(userId, br, model);
-
-            verify(model).addAttribute(KEY_DETAIL, null);
-            assertThat(view).isEqualTo(viewName);
-        }
-
-        @Test
         public void getUserDetail_Return_View_With_Null_When_Service_Throws() throws SQLException {
-            when(br.hasErrors()).thenReturn(false);
             when(userService.getUserDetail(userId)).thenThrow(SQLException.class);
-            String view = userController.getUserDetail(userId, br, model);
+            String view = userController.getUserDetail(userId, model);
 
             verify(model).addAttribute(KEY_DETAIL, null);
             assertThat(view).isEqualTo(viewName);
@@ -63,21 +53,19 @@ public class UserControllerTest {
         }
 
         @Test
-        public void getUserDetail_Return_View_With_Null_When_No_User_Detail() throws SQLException {
-            when(br.hasErrors()).thenReturn(false);
+        public void getUserDetail_Return_View_With_Null_When_No_UserDetail() throws SQLException {
             when(userService.getUserDetail(userId)).thenReturn(Optional.empty());
 
-            String view = userController.getUserDetail(userId, br, model);
+            String view = userController.getUserDetail(userId, model);
 
             verify(model).addAttribute(KEY_DETAIL, null);
             assertThat(view).isEqualTo(viewName);
         }
 
         @Test
-        public void getUserDetail_Return_View_With_Detail() throws SQLException {
-            when(br.hasErrors()).thenReturn(false);
+        public void getUserDetail_Return_View_With_Detail_When_Has_UserDetail() throws SQLException {
             when(userService.getUserDetail(userId)).thenReturn(Optional.of(dummyDto));
-            String view = userController.getUserDetail(userId, br, model);
+            String view = userController.getUserDetail(userId, model);
 
             verify(model).addAttribute(KEY_DETAIL, dummyDto);
             assertThat(view).isEqualTo(viewName);
