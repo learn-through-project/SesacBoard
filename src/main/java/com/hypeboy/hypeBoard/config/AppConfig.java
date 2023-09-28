@@ -12,7 +12,11 @@ import javax.sql.DataSource;
 @Configuration
 public class AppConfig {
 
-    private String dataSourceUrl = "";
+    @Value("${spring.datasource.url}")
+    private String dataSourceUrl;
+
+    @Value("${spring.datasource.username}")
+    private String username;
     @Value("${spring.datasource.password}")
     private String password;
     @Bean
@@ -23,7 +27,7 @@ public class AppConfig {
     public DataSource dataSource(){
         return DataSourceBuilder.create()
                 .url(dataSourceUrl)
-                .username("root")
+                .username(username)
                 .password(password)
                 .build();
     }
