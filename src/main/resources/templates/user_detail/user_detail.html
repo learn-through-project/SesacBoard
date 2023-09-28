@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>User_detail</title>
+
 </head>
 <body>
-  <h1>profile</h1>
-  <h1 th:text="${hi}"></h1>
+<h1>profile</h1>
+<div th:if="${detail != null}">
+    <h1 th:text="${detail.getId()}"></h1>
+    <h1 th:text="${detail.getName()}"></h1>
+    <h1 th:text="${detail.getPhone()}"></h1>
+    <h1 th:text="${detail.getNickname()}"></h1>
+    <h1 th:text="${detail.getEmail()}"></h1>
+</div>
+<h1 th:if="${detail == null}">해당 유저 정보가 없습니다.</h1>
 </body>
 </html>
