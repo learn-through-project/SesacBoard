@@ -81,6 +81,27 @@ public class CommentServiceTest {
     }
 
     @Test
+    public void deleteAllDeletedStatusComment_Return_Fail() throws Exception {
+        String errorMsg = "An error occurred";
+        when(commentRepository.deletePermanently()).thenThrow(new Exception(errorMsg));
+        ServiceDto<Boolean> result = commentService.deleteAllDeletedStatusComment();
+
+        Assertions.assertThat(result.isOk()).isFalse();
+        Assertions.assertThat(result.getError().getMsg()).isEqualTo(errorMsg);
+    }
+
+    
+
+    @Test
+    public void deleteAllDeletedStatusComment_Return_Success() throws Exception {
+        when(commentRepository.deletePermanently()).thenReturn(true);
+        ServiceDto<Boolean> result = commentService.deleteAllDeletedStatusComment();
+
+        Assertions.assertThat(result.isOk()).isTrue();
+        Assertions.assertThat(result.getData()).isTrue();
+    }
+
+    @Test
     public void makeStatusDeletedByPostId_Return_Fail() throws Exception {
         Integer invalidPostId = 1 + 10000;
         String errorMsg = "An error occurred";
