@@ -10,4 +10,8 @@ public interface CommentService {
     public ServiceDto<List<Comment>> getCommentByPostId(Integer postId, Integer count);
 
     public ServiceDto<List<Comment>> getCommentList(Integer postId, Integer lastId, Integer count);
+
+    public ServiceDto<Boolean> createComment(CommentDto dto);
+
+    public ServiceDto<Boolean> editComment(CommentDto dto);
 }
