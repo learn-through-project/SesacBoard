@@ -2,15 +2,16 @@ package com.hypeboy.hypeBoard.service;
 
 
 import com.hypeboy.hypeBoard.dto.CommentDto;
-import com.hypeboy.hypeBoard.dto.ErrorDto;
 import com.hypeboy.hypeBoard.dto.ServiceDto;
 import com.hypeboy.hypeBoard.entity.Comment;
+import com.hypeboy.hypeBoard.entity.CommentStatus;
 import com.hypeboy.hypeBoard.repository.CommentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -22,6 +23,58 @@ public class CommentServiceImpl implements CommentService {
         this.commentRepository = commentRepository;
     }
 
+
+    @Override
+    public ServiceDto<Boolean> makeStatusDeletedByPostId(Integer postId) {
+        ServiceDto<Boolean> resDto = new ServiceDto<>();
+
+        try {
+            boolean isSuccess = commentRepository.updateStatusDeleteByPostId(postId);
+            resDto.setData(isSuccess);
+        } catch (Exception ex) {
+            resDto.setError(ex.getMessage());
+        }
+
+        return resDto;
+    }
+
+
+    @Override
+    public ServiceDto<Boolean> makeStatusDeletedById(Integer commentId) {
+        ServiceDto<Boolean> resDto = new ServiceDto<>();
+
+        try {
+            boolean isSuccess = commentRepository.updateStatusDeleteById(commentId);
+            resDto.setData(isSuccess);
+        } catch (Exception ex) {
+            resDto.setError(ex.getMessage());
+        }
+
+        return resDto;
+    }
+
+    @Override
+    public ServiceDto<Boolean> editStatus(Integer commentId, CommentStatus status) {
+        ServiceDto<Boolean> resDto = new ServiceDto<>();
+
+        try {
+            Optional<Comment> optionalComment = commentRepository.findById(commentId);
+
+            if (optionalComment.isPresent()) {
+                Comment comment = optionalComment.get();
+                comment.setStatus(status);
+                boolean isSuccess = commentRepository.update(comment);
+                resDto.setData(isSuccess);
+            } else {
+                resDto.setData(false);
+            }
+
+        } catch (Exception ex) {
+            resDto.setError(ex.getMessage());
+        }
+
+        return resDto;
+    }
 
     @Override
     public ServiceDto<Boolean> editComment(CommentDto dto) {
@@ -89,6 +142,8 @@ public class CommentServiceImpl implements CommentService {
 
         return resDto;
     }
+
+
 
     private Comment fromDtoToComment(CommentDto dto) {
         int postId = dto.getPostId();

@@ -13,9 +13,9 @@ public interface CommentRepository {
 
     boolean update(Comment comment) throws SQLException;
 
-    boolean updateStatusReadyToDeleteById(int commentId) throws Exception;
+    boolean updateStatusDeleteById(int commentId) throws Exception;
 
-    boolean updateStatusReadyToDeleteByPostId(int commentId) throws Exception;
+    boolean updateStatusDeleteByPostId(int commentId) throws Exception;
 
     boolean deletePermanently() throws Exception;
 
