@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>게시물 작성</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background: url('arrow.png') no-repeat right;
+            background-size: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<h1>게시물 작성</h1>
+<form action="/create_post" method="post">
+    <label for="id">ID:</label>
+    <input type="text" id="id" name="id" required><br>
+
+    <label for="nickname">닉네임:</label>
+    <input type="text" id="nickname" name="nickname" required><br>
+
+    <label for="category">카테고리:</label>
+    <select id="category" name="category">
+        <option value="잡담">잡담</option>
+        <option value="운동">운동</option>
+        <option value="정보">정보</option>
+    </select><br>
+
+    <label for="title">제목:</label>
+    <input type="text" id="title" name="title" required><br>
+
+
+    <label for="textContent">내용:</label><br>
+    <textarea id="textContent" name="textContent" rows="5" cols="40"></textarea><br>
+
+
+    <input type="submit" value="게시물 작성">
+</form>
+</body>
+</html>
